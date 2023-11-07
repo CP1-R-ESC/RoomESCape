@@ -24,6 +24,9 @@
     <ClCompile Include="cJson\cJSON_Utils.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Web.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -33,6 +36,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cJson\cJSON_Utils.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Web.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

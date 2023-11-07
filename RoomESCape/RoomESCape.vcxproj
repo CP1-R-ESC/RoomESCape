@@ -104,10 +104,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)cURL\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)cURL\lib\DLL Debug - DLL Windows SSPI;$(ProjectDir)cURL\lib\DLL Release - DLL Windows SSPI;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libcurld.lib;libcurl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -130,11 +133,13 @@
     <ClCompile Include="cJson\cJSON.c" />
     <ClCompile Include="cJson\cJSON_Utils.c" />
     <ClCompile Include="Main.c" />
+    <ClCompile Include="Web.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cJson\cJSON.h" />
     <ClInclude Include="cJson\cJSON_Utils.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="Web.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
