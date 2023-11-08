@@ -1,11 +1,12 @@
-﻿  Main.c
-D:\C\RoomESCape\RoomESCape\Main.c(72,18): warning C4267: '+=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Web.obj : error LNK2005: BASE_URL이(가) Main.obj에 이미 정의되어 있습니다.
-Web.obj : error LNK2005: BASE_URL_SIZE이(가) Main.obj에 이미 정의되어 있습니다.
-Web.obj : error LNK2005: SERVICE_KEY_ENCORDING이(가) Main.obj에 이미 정의되어 있습니다.
-Web.obj : error LNK2005: SERVICE_KEY_ENCORDING_SIZE이(가) Main.obj에 이미 정의되어 있습니다.
-Web.obj : error LNK2005: SERVICE_KEY_DECORDING이(가) Main.obj에 이미 정의되어 있습니다.
-Web.obj : error LNK2005: SERVICE_KEY_DECORDING_SIZE이(가) Main.obj에 이미 정의되어 있습니다.
-Web.obj : error LNK2005: SAMSUNG_ELECTRONICS이(가) Main.obj에 이미 정의되어 있습니다.
-     D:\C\RoomESCape\RoomESCape\x64\Debug\RoomESCape.lib 라이브러리 및 D:\C\RoomESCape\RoomESCape\x64\Debug\RoomESCape.exp 개체를 생성하고 있습니다.
-D:\C\RoomESCape\RoomESCape\x64\Debug\RoomESCape.exe : fatal error LNK1169: 여러 번 정의된 기호가 있습니다.
+﻿  JsonManger.c
+D:\C\RoomESCape\RoomESCape\JsonManger.c(10,14): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
+D:\C\RoomESCape\RoomESCape\JsonManger.c(14,14): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
+D:\C\RoomESCape\RoomESCape\JsonManger.c(18,14): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
+D:\C\RoomESCape\RoomESCape\JsonManger.c(26,14): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
+D:\C\RoomESCape\RoomESCape\JsonManger.c(30,14): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
+D:\C\RoomESCape\RoomESCape\JsonManger.c(34,14): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
+D:\C\RoomESCape\RoomESCape\JsonManger.c(38,15): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
+D:\C\RoomESCape\RoomESCape\JsonManger.c(41,15): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
+D:\C\RoomESCape\RoomESCape\JsonManger.c(44,15): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
+D:\C\RoomESCape\RoomESCape\JsonManger.c(47,25): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  RoomESCape.vcxproj -> D:\C\RoomESCape\RoomESCape\x64\Debug\RoomESCape.exe

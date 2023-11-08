@@ -11,9 +11,11 @@
 
 // 3rd party lib
 #include <curl/curl.h>
+#include "cJSON/cJSON.h"
 
 // custom lib
 #include "Web.h"
+#include "JsonManager.h"
 
 typedef struct
 {

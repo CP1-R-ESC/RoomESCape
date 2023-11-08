@@ -2,8 +2,8 @@
 
 int main()
 {
-    SetConsoleOutputCP(CP_UTF8);
-    SetConsoleCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);          // Set the console input  code page to UTF-8
+    SetConsoleOutputCP(CP_UTF8);    // Set the console output code page to UTF-8
 
     CURL* curl;
     CURLcode resCode;
@@ -34,14 +34,15 @@ int main()
 
         curl_easy_setopt(curl, CURLOPT_URL, data);
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&res);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &res);
 
         fprintf(stdout, "Load Json File...\n");
 
         resCode = curl_easy_perform(curl);
         if (resCode == CURLE_OK)
         {
-            fprintf(stdout, "%s", res.data);
+            InitializeJSON(res.data);
+            //fprintf(stdout, "%s", res.data);
         }
         else
         {
@@ -49,8 +50,10 @@ int main()
         }
 
         free(res.data);
+        free(data);
         curl_easy_cleanup(curl);
     }
+
     return 0;
 }
 
@@ -60,10 +63,11 @@ size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp)
     response* res = (response*)userp;
 
     // 데이터를 메모리에 추가
-    res->data = realloc(res->data, res->size + total_size + 1);
-    if (res->data == NULL) {
+    res->data = (char*)realloc(res->data, res->size + total_size + 1);
+    if (res->data == NULL)
+    {
         // 메모리 할당 실패
-        return 0;
+        return -1;
     }
 
     // 데이터 복사

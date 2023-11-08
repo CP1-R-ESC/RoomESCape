@@ -132,12 +132,14 @@
   <ItemGroup>
     <ClCompile Include="cJson\cJSON.c" />
     <ClCompile Include="cJson\cJSON_Utils.c" />
+    <ClCompile Include="JsonManger.c" />
     <ClCompile Include="Main.c" />
     <ClCompile Include="Web.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cJson\cJSON.h" />
     <ClInclude Include="cJson\cJSON_Utils.h" />
+    <ClInclude Include="JsonManager.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Web.h" />
   </ItemGroup>
