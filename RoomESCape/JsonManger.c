@@ -1,7 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "JsonManager.h"
 #include "cJSON/cJSON.h"
-
-#include <stdio.h>
 
 void InitializeJSON(char* jsonData)
 {
@@ -44,11 +45,11 @@ void InitializeJSON(char* jsonData)
 			return NULL;
 
 		Stock stock;
-		stock.versus = versus0->valuedouble;
-		stock.startingPrice = startingPrice0->valueint;
-		stock.closingPrice = closingPrice0->valueint;
+		stock.versus = atoi(versus0->valuestring);
+		stock.startingPrice = atoi(startingPrice0->valuestring);
+		stock.closingPrice = atoi(closingPrice0->valuestring);
 
-	fprintf(stdout, "%f\n", stock.versus);
+	fprintf(stdout, "%d\n", stock.versus);
 	fprintf(stdout, "%d\n", stock.startingPrice);
 	fprintf(stdout, "%d\n", stock.closingPrice);
 

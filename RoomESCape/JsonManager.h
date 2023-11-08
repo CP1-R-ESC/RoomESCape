@@ -3,7 +3,7 @@
 
 typedef struct
 {
-	float versus;
+	int versus;
 	int startingPrice;
 	int closingPrice;
 } Stock;
