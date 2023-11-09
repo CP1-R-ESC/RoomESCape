@@ -1,12 +1,12 @@
-﻿  JsonManger.c
-D:\C\RoomESCape\RoomESCape\JsonManger.c(10,14): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
-D:\C\RoomESCape\RoomESCape\JsonManger.c(14,14): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
-D:\C\RoomESCape\RoomESCape\JsonManger.c(18,14): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
-D:\C\RoomESCape\RoomESCape\JsonManger.c(26,14): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
-D:\C\RoomESCape\RoomESCape\JsonManger.c(30,14): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
-D:\C\RoomESCape\RoomESCape\JsonManger.c(34,14): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
-D:\C\RoomESCape\RoomESCape\JsonManger.c(38,15): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
-D:\C\RoomESCape\RoomESCape\JsonManger.c(41,15): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
-D:\C\RoomESCape\RoomESCape\JsonManger.c(44,15): warning C4098: 'InitializeJSON': 'void' 함수에서 값을 반환하고 있습니다.
-D:\C\RoomESCape\RoomESCape\JsonManger.c(47,25): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  GameManager.c
+D:\C\RoomESCape\RoomESCape\GameManager.c(13,8): warning C4013: 'time'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+  JsonManger.c
+D:\C\RoomESCape\RoomESCape\JsonManger.c(79,2): warning C4047: 'return': 'Corporation *'의 간접 참조 수준이 'Corporation **'과(와) 다릅니다.
+  Main.c
+  Web.c
+D:\C\RoomESCape\RoomESCape\Web.c(54,9): warning C4047: 'return': 'char *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+D:\C\RoomESCape\RoomESCape\Web.c(91,18): warning C4267: '+=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+D:\C\RoomESCape\RoomESCape\JsonManger.c(79): warning C4172: 지역 변수 또는 임시: corporation의 주소를 반환하고 있습니다.
+     D:\C\RoomESCape\RoomESCape\x64\Debug\RoomESCape.lib 라이브러리 및 D:\C\RoomESCape\RoomESCape\x64\Debug\RoomESCape.exp 개체를 생성하고 있습니다.
   RoomESCape.vcxproj -> D:\C\RoomESCape\RoomESCape\x64\Debug\RoomESCape.exe

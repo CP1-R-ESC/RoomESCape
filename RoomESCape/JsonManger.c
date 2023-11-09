@@ -4,7 +4,7 @@
 #include "JsonManager.h"
 #include "cJSON/cJSON.h"
 
-void InitializeJSON(char* jsonData)
+Corporation* InitializeJSON(char* jsonData)
 {
 	cJSON* root = cJSON_Parse(jsonData);
 	if (root == NULL)
@@ -20,7 +20,7 @@ void InitializeJSON(char* jsonData)
 
 		cJSON* _totalCount = cJSON_GetObjectItem(body, "totalCount");
 		int totalCount = _totalCount->valueint;
-		fprintf(stdout, "%d\n", totalCount);
+		fprintf(stdout, "Stock Count: %d\n", totalCount);
 
 	cJSON* items = cJSON_GetObjectItem(body, "items");
 	if (items == NULL)
@@ -30,40 +30,51 @@ void InitializeJSON(char* jsonData)
 	if (itemArray == NULL)
 		return NULL;
 
-	cJSON* item0 = cJSON_GetArrayItem(itemArray, 0);
-	if (item0 == NULL)
-		return NULL;
-
-		cJSON* versus0 = cJSON_GetObjectItem(item0, "vs");
-		if (versus0 == NULL)
-			return NULL;
-		cJSON* startingPrice0 = cJSON_GetObjectItem(item0, "mkp");
-		if (startingPrice0 == NULL)
-			return NULL;
-		cJSON* closingPrice0  = cJSON_GetObjectItem(item0, "clpr");
-		if (closingPrice0 == NULL)
+		cJSON* stockJson = cJSON_GetArrayItem(itemArray, 0);
+		if (stockJson == NULL)
 			return NULL;
 
-		Stock stock;
-		stock.versus = atoi(versus0->valuestring);
-		stock.startingPrice = atoi(startingPrice0->valuestring);
-		stock.closingPrice = atoi(closingPrice0->valuestring);
+		cJSON* name = cJSON_GetObjectItem(stockJson, "itmsNm");
+		if (name == NULL)
+			return NULL;
 
-	fprintf(stdout, "%d\n", stock.versus);
-	fprintf(stdout, "%d\n", stock.startingPrice);
-	fprintf(stdout, "%d\n", stock.closingPrice);
+	Corporation* corporation = (Corporation*)malloc(sizeof(Corporation));
+	corporation->name = name->valuestring;
+	corporation->stockCount = totalCount;
+	corporation->stocks = (Stock*)malloc(sizeof(Stock) * totalCount);
 
-	//int arraySize = cJSON_GetArraySize(itemArray);
-	//for (int i = 0; i < arraySize; i++)
-	//{
-	//	cJSON* item = cJSON_GetArrayItem(itemArray, i);
-	//	if (item)
-	//	{
-	//		// 각 항목의 필드에 접근 가능
-	//		cJSON* basDt = cJSON_GetObjectItem(item, "basDt");
-	//		cJSON* itmsNm = cJSON_GetObjectItem(item, "itmsNm");
-	//		// 필요한 데이터를 처리
-	//	}
-	//}
+#ifdef DEBUG_MODE
+	fprintf(stdout, "----------D+0 Day----------\n");
+#endif // DEBUG_MODE
 
+	for (int i = 0; i < totalCount; i++)
+	{
+		cJSON* stockJson = cJSON_GetArrayItem(itemArray, totalCount - i - 1);
+		if (stockJson == NULL)
+			return NULL;
+
+		cJSON* versus = cJSON_GetObjectItem(stockJson, "vs");
+		if (versus == NULL)
+			return NULL;
+		cJSON* startingPrice = cJSON_GetObjectItem(stockJson, "mkp");
+		if (startingPrice == NULL)
+			return NULL;
+		cJSON* closingPrice = cJSON_GetObjectItem(stockJson, "clpr");
+		if (closingPrice == NULL)
+			return NULL;
+
+		corporation->stocks[i].versus = atoi(versus->valuestring);
+		corporation->stocks[i].startingPrice = atoi(startingPrice->valuestring);
+		corporation->stocks[i].closingPrice = atoi(closingPrice->valuestring);
+
+#ifdef DEBUG_MODE
+		fprintf(stdout, "Corporation Name: %s\n", corporation->name);
+		fprintf(stdout, "%d\n", corporation->stocks[i].versus);
+		fprintf(stdout, "%d\n", corporation->stocks[i].startingPrice);
+		fprintf(stdout, "%d\n", corporation->stocks[i].closingPrice);
+		fprintf(stdout, "----------D+%d Day----------\n", i + 1);
+#endif // DEBUG_MODE
+	}
+
+	return &corporation;
 }

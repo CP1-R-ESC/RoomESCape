@@ -16,11 +16,8 @@
 // custom lib
 #include "Web.h"
 #include "JsonManager.h"
+#include "GameManager.h"
+#include "RenderManager.h"
 
-typedef struct
-{
-    char* data;
-    int   size;
-} response;
-
-size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp);
+// Reference
+// https://huiyu.tistory.com/entry/C%EC%96%B8%EC%96%B4%EB%A1%9C-%EA%B2%8C%EC%9E%84%EB%A7%8C%EB%93%A4%EA%B8%B0-2-%EA%B2%8C%EC%9E%84-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9A%A9%EC%96%B4

@@ -132,15 +132,19 @@
   <ItemGroup>
     <ClCompile Include="cJson\cJSON.c" />
     <ClCompile Include="cJson\cJSON_Utils.c" />
+    <ClCompile Include="GameManager.c" />
     <ClCompile Include="JsonManger.c" />
     <ClCompile Include="Main.c" />
+    <ClCompile Include="RenderManager.c" />
     <ClCompile Include="Web.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cJson\cJSON.h" />
     <ClInclude Include="cJson\cJSON_Utils.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="JsonManager.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="RenderManager.h" />
     <ClInclude Include="Web.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

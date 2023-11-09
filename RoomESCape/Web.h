@@ -13,4 +13,13 @@ const int   SERVICE_KEY_DECORDING_SIZE;
 // curl type (utf-8 Encording) -> after day, Can I develop Encorder?
 const char* SAMSUNG_ELECTRONICS;
 
+typedef struct
+{
+    char* jsonData;
+    int   size;
+} Response;
+
 char* InitializeURL(const char* corporationName, const char* beginDate, const char* endDate);
+
+char* PostWebRequest(char* url);
+size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp);

@@ -1,5 +1,7 @@
 D:\C\RoomESCape\RoomESCape\cJson\cJSON.c;D:\C\RoomESCape\RoomESCape\x64\Debug\cJSON.obj
 D:\C\RoomESCape\RoomESCape\cJson\cJSON_Utils.c;D:\C\RoomESCape\RoomESCape\x64\Debug\cJSON_Utils.obj
+D:\C\RoomESCape\RoomESCape\GameManager.c;D:\C\RoomESCape\RoomESCape\x64\Debug\GameManager.obj
 D:\C\RoomESCape\RoomESCape\JsonManger.c;D:\C\RoomESCape\RoomESCape\x64\Debug\JsonManger.obj
 D:\C\RoomESCape\RoomESCape\Main.c;D:\C\RoomESCape\RoomESCape\x64\Debug\Main.obj
+D:\C\RoomESCape\RoomESCape\RenderManager.c;D:\C\RoomESCape\RoomESCape\x64\Debug\RenderManager.obj
 D:\C\RoomESCape\RoomESCape\Web.c;D:\C\RoomESCape\RoomESCape\x64\Debug\Web.obj
