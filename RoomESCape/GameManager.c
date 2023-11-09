@@ -1,26 +1,17 @@
 #include <time.h>
 #include <conio.h>
+#include <stdlib.h>
 
 #include "GameManager.h"
-#include "RenderManager.h"
 
 void InitializeGame()
 {
-	ScreenInitialize();
-
-	srand(time(NULL));
+	
 }
 
 void UpdateGame()
 {
 
-}
-
-void RenderGame()
-{
-	ScreenClear();
-
-	ScreenFlipping();
 }
 
 void WaitGame(clock_t oldTime)
@@ -31,25 +22,23 @@ void WaitGame(clock_t oldTime)
 		curTime = clock();
 		if (33 < curTime - oldTime)
 		{
-			break;
+			return;
 		}
 	}
-
-	return;
 }
 
 void ReleaseGame()
 {
-	ScreenRelease();
+	
 }
 
-void GetKeyInput()
+int GetKeyInput()
 {
 	int nKey = _getch();
 
 	if (nKey == KEY_ESC)
 	{
-		exit(0);
+		return 1;
 	}
 
 	switch (nKey)
@@ -60,9 +49,9 @@ void GetKeyInput()
 		break;
 	case 'e':
 		break;
-
-
 	default:
 		break;
 	}
+
+	return 0;
 }

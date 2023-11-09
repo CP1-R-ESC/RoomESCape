@@ -1,7 +1,7 @@
 #pragma once
 #pragma warning(disable:4996)
 
-#define DEBUG_MODE
+//#define DEBUG_MODE
 
 typedef struct
 {

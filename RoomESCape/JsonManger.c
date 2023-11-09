@@ -20,7 +20,11 @@ Corporation* InitializeJSON(char* jsonData)
 
 		cJSON* _totalCount = cJSON_GetObjectItem(body, "totalCount");
 		int totalCount = _totalCount->valueint;
+
+#ifdef DEBUG_MODE
 		fprintf(stdout, "Stock Count: %d\n", totalCount);
+#endif // DEBUG_MODE
+
 
 	cJSON* items = cJSON_GetObjectItem(body, "items");
 	if (items == NULL)
@@ -76,5 +80,5 @@ Corporation* InitializeJSON(char* jsonData)
 #endif // DEBUG_MODE
 	}
 
-	return &corporation;
+	return corporation;
 }

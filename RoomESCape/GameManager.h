@@ -1,6 +1,8 @@
 #pragma once
 #pragma warning(disable:4996)
 
+#include <time.h>
+
 #define FALSE 0
 #define TRUE  1
 
@@ -8,8 +10,7 @@
 
 void InitializeGame();
 void UpdateGame();
-void RenderGame();
 void WaitGame(clock_t oldTime);
 void ReleaseGame();
 
-void GetKeyInput();
+int GetKeyInput();

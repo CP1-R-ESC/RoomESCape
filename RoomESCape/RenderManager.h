@@ -1,6 +1,13 @@
 #pragma once
 #pragma warning(disable:4996)
 
+#include <time.h>
+
+#define FRAME_BUFFER_SIZE 10
+
+#define SCREEN_WIDTH  1920
+#define SCREEN_HEIGHT 1080
+
 #define BLACK	   0
 #define BLUE1	   1
 #define GREEN1	   2
@@ -18,11 +25,14 @@
 #define YELLOW2	  14
 #define WHITE	  15
 
-void ScreenInitialize();	// display buffer initialize - front buffer, back buffer create
-void ScreenClear();			// one buffer draw, other buffer have to be cleared
-void ScreenFlipping();		// active buffer change state
-void ScreenRelease();		// release two buffer
-void ScreenPrint(int x, int y, char* string);			// output
+void InitializeScreen();						// display buffer initialize - front buffer, back buffer create
+void RenderScreen();
+void ClearScreen();								// one buffer draw, other buffer have to be cleared
+void FlippingScreen();							// active buffer change state
+void CheckFrameScreen();
+void WaitRenderScreen(clock_t oldTime);
+void ReleaseScreen();							// release two buffer
+void PrintScreen(int x, int y, char* string);	// output
 
 void SetColor(int fgColor, int bgColor);
 void HideCursor();

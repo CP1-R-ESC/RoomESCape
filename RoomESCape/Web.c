@@ -58,7 +58,9 @@ char* PostWebRequest(char* url)
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &webResonse);
 
+#ifdef DEBUG_MODE
     fprintf(stdout, "Load Json File...\n");
+#endif // DEBUG_MODE
 
     resCode = curl_easy_perform(curl);
     if (resCode != CURLE_OK)
@@ -70,7 +72,6 @@ char* PostWebRequest(char* url)
     // InitializeJSON(webResonse.jsonData);
     // fprintf(stdout, "%s", res.data);
 
-    free(url);
     curl_easy_cleanup(curl);
 
     return jsonData;
