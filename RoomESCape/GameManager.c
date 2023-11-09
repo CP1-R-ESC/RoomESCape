@@ -3,25 +3,63 @@
 #include <stdlib.h>
 
 #include "GameManager.h"
+#include "Web.h"
+
+char* url;
+char* jsonData;
+Corporation* corporation;
+int day;
+
+clock_t sharedCurTime, sharedOldTime;
+
+static clock_t curTime, oldTime;
 
 void InitializeGame()
 {
-	
+	// JsonData Initialize
+	url = InitializeURL(SAMSUNG_ELECTRONICS, "20200000", "20210000");
+	jsonData = PostWebRequest(url);
+	corporation = InitializeJSON(jsonData);
+
+	hasLoadComplete = true;
+
+	// Turn Initialize
+	int turn = 0;
+	const int MAX_TURN = corporation->stockCount;
+
+	// JsonData Release
+	free(url);
+	free(jsonData);
+
+	// Time Initialize
+	sharedOldTime = clock();
+	oldTime = clock();
+	day = 0;
 }
 
 void UpdateGame()
 {
-
+	
 }
 
-void WaitGame(clock_t oldTime)
+void ProcessGame()
 {
-	clock_t curTime;
+	curTime = clock();
+	if (2000 <= curTime - oldTime)
+	{
+		oldTime = clock();
+		day++;
+	}
+}
+
+void WaitGame()
+{
 	while (TRUE)
 	{
-		curTime = clock();
-		if (33 < curTime - oldTime)
+		sharedCurTime = clock();
+		if (33 < sharedCurTime - sharedOldTime)
 		{
+			sharedOldTime = clock();
 			return;
 		}
 	}
@@ -29,7 +67,10 @@ void WaitGame(clock_t oldTime)
 
 void ReleaseGame()
 {
-	
+	// Corporation Release
+	free(corporation->name);
+	free(corporation->stocks);
+	free(corporation);
 }
 
 int GetKeyInput()
@@ -38,7 +79,7 @@ int GetKeyInput()
 
 	if (nKey == KEY_ESC)
 	{
-		return 1;
+		return -1;
 	}
 
 	switch (nKey)

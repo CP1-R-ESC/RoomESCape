@@ -1,13 +1,14 @@
 #include "Main.h"
 
-char* url;
-char* jsonData;
-Corporation* corporation;
-
-static bool isDownESC;
+bool hasExitRenderThread;
+bool hasLoadComplete;
+bool isDownESC;
 
 int main()
 {
+    SetConsoleTitle(TEXT("R-ESC"));
+    system("mode con:cols=200 lines=50");
+
     // Thread
     HANDLE threads[THREAD_COUNT];
     int threadIDs[THREAD_COUNT];
@@ -18,30 +19,12 @@ int main()
     threadIDs[THREAD_RENDER] = THREAD_RENDER;
     threads[THREAD_RENDER] = (HANDLE)_beginthreadex(NULL, 0, &RenderDisplay_thread, &threadIDs[THREAD_RENDER], 0, NULL);
 
-    // JsonData Initialize
-    url = InitializeURL(SAMSUNG_ELECTRONICS, "20200000", "20210000");
-    jsonData = PostWebRequest(url);
-    corporation = InitializeJSON(jsonData);
-
-    // JsonData Release
-    free(url);
-    free(jsonData);
-
-    // Turn Initialize
-    int turn = 0;
-    const int MAX_TURN = corporation->stockCount;
-
     // Wait Other Threads
     WaitForMultipleObjects(THREAD_COUNT, threads, TRUE, INFINITE);
 
     // Thread Release
     CloseHandle(threads[THREAD_GAME]);
     CloseHandle(threads[THREAD_RENDER]);
-
-    // Corporation Release
-    free(corporation->name);
-    free(corporation->stocks);
-    free(corporation);
 
     return 0;
 }
@@ -51,7 +34,7 @@ unsigned int _stdcall PlayGame_thread()
     InitializeGame();
 
     // Main Game Loop
-    while (TRUE)
+    while (true)
     {
         // turn time?
         /*if (turn < MAX_TURN)
@@ -62,7 +45,7 @@ unsigned int _stdcall PlayGame_thread()
 
         if (_kbhit())
         {
-            if (GetKeyInput() == 1)
+            if (GetKeyInput() == -1)
             {
                 isDownESC = true;
                 break;
@@ -71,10 +54,17 @@ unsigned int _stdcall PlayGame_thread()
 
         UpdateGame();
 
-        WaitGame(clock());  // Set FPS
+        ProcessGame();
+        WaitGame();     // Set FPS
+    }
+
+    while (hasExitRenderThread == false)
+    {
+        // Wait Release RenderThread
     }
 
     ReleaseGame();
+    fprintf(stdout, "gameThread exit\n");
 
     return 0;
 }
@@ -83,7 +73,8 @@ unsigned int _stdcall RenderDisplay_thread()
 {
     InitializeScreen();
 
-    while (TRUE)
+    // Main Render Loop
+    while (true)
     {
         if (isDownESC)
         {
@@ -92,26 +83,11 @@ unsigned int _stdcall RenderDisplay_thread()
 
         RenderScreen();
 
-        WaitRenderScreen(clock());
+        WaitRenderScreen(&isDownESC);
     }
     
     ReleaseScreen();
+    fprintf(stdout, "renderThread exit\n");
 
     return 0;
-}
-
-void LoadJsonData()
-{
-    char* url = InitializeURL(SAMSUNG_ELECTRONICS, "20200000", "20210000");
-    char* jsonData = PostWebRequest(url);
-    Corporation* corporation = InitializeJSON(jsonData);
-
-    int turn = 0;
-    const int MAX_TURN = corporation->stockCount;
-
-    free(url);
-    free(jsonData);
-    free(corporation->name);
-    free(corporation->stocks);
-    free(corporation);
 }

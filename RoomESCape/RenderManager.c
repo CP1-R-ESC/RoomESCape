@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <Windows.h>
 
+#include "GameManager.h"
 #include "RenderManager.h"
 
 static int frameCount;
@@ -17,11 +18,16 @@ void InitializeScreen()
 
 	HideCursor();
 
-	SetConsoleCP(CP_UTF8);          // Set the console input  code page to UTF-8
-	SetConsoleOutputCP(CP_UTF8);    // Set the console output code page to UTF-8
+	SetConsoleCP(CP_WINANSI);          // Set the console input  code page to UTF-8
+	SetConsoleOutputCP(CP_WINANSI);    // Set the console output code page to UTF-8
+
+	while (hasLoadComplete == false)
+	{
+		PrintScreen(0, 0, "Json Data is Loading from Web...");
+	}
 
 	system("cls");					// Render Clear
-
+	
 	frameCount = 0;
 	frameTextBuffer = (char*)malloc(sizeof(char) * FRAME_BUFFER_SIZE);
 	sprintf(frameTextBuffer, "FPS: %3d", frameCount);
@@ -32,10 +38,19 @@ void RenderScreen()
 {
 	ClearScreen();
 
+	PrintScreen(25, 25, "收收收收收收收收收收收收");
 	// Render Screen Logic
-	{
+	/*{
+		int height = corporation->stocks[day].startingPrice < corporation->stocks[day].closingPrice;
+		height %= 100;
+		if (0 < height)
+		{
+			for (int i = 0; i < height; i++)
+			{
 
-	}
+			}
+		}
+	}*/
 
 	CheckFrameScreen();
 
@@ -46,7 +61,7 @@ void ClearScreen()
 {
 	COORD coord = { 0, 0 };
 	DWORD dw;
-	FillConsoleOutputCharacter(screenBuffer[screenIndex], ' ', 80 * 25, coord, &dw);
+	FillConsoleOutputCharacter(screenBuffer[screenIndex], ' ', 200 * 50, coord, &dw);
 }
 
 void FlippingScreen()
@@ -65,16 +80,15 @@ void CheckFrameScreen()
 		frameOldTime = clock();
 		frameCount = 0;
 	}
+
 	PrintScreen(0, 0, frameTextBuffer);
 }
 
-void WaitRenderScreen(clock_t oldTime)
+void WaitRenderScreen()
 {
-	clock_t curTime;
 	while (TRUE)
 	{
-		curTime = clock();
-		if (33 < curTime - oldTime)
+		if (33 < sharedCurTime - sharedOldTime || isDownESC)
 		{
 			return;
 		}
@@ -87,6 +101,8 @@ void ReleaseScreen()
 	CloseHandle(screenBuffer[1]);
 
 	free(frameTextBuffer);
+
+	hasExitRenderThread = true;
 }
 
 void PrintScreen(int x, int y, char* string)
@@ -113,10 +129,4 @@ void HideCursor(void)
 
 	GetConsoleCursorInfo(screenBuffer[1], &cursorInfo);
 	SetConsoleCursorInfo(screenBuffer[1], &cursorInfo);
-}
-
-void GotoCoordinate(int x, int y)
-{
-	COORD pos = { x, y };
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
