@@ -7,7 +7,7 @@ bool isDownESC;
 int main()
 {
     SetConsoleTitle(TEXT("R-ESC"));
-    system("mode con:cols=200 lines=50");
+    system("mode con:cols=250 lines=60");
 
     // Thread
     HANDLE threads[THREAD_COUNT];
@@ -31,18 +31,15 @@ int main()
 
 unsigned int _stdcall PlayGame_thread()
 {
-    InitializeGame();
+    if (InitializeGame() == false)
+    {
+        return -1;
+    }
+    
 
     // Main Game Loop
     while (true)
     {
-        // turn time?
-        /*if (turn < MAX_TURN)
-        {
-            break;
-        }
-        turn++;*/
-
         if (_kbhit())
         {
             if (GetKeyInput() == -1)
@@ -54,7 +51,13 @@ unsigned int _stdcall PlayGame_thread()
 
         UpdateGame();
 
-        ProcessGame();
+        if (ProcessGame() == false)
+        {
+            isDownESC = true;
+            break;
+        }
+
+
         WaitGame();     // Set FPS
     }
 
@@ -83,7 +86,7 @@ unsigned int _stdcall RenderDisplay_thread()
 
         RenderScreen();
 
-        WaitRenderScreen(&isDownESC);
+        WaitRenderScreen();
     }
     
     ReleaseScreen();

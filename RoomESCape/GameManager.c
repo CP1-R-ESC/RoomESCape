@@ -8,24 +8,27 @@
 char* url;
 char* jsonData;
 Corporation* corporation;
-int day;
+int turn;
+int maxTurn;
 
 clock_t sharedCurTime, sharedOldTime;
 
 static clock_t curTime, oldTime;
 
-void InitializeGame()
+bool InitializeGame()
 {
 	// JsonData Initialize
 	url = InitializeURL(SAMSUNG_ELECTRONICS, "20200000", "20210000");
 	jsonData = PostWebRequest(url);
 	corporation = InitializeJSON(jsonData);
+	if (corporation == NULL)
+		return false;
 
 	hasLoadComplete = true;
 
 	// Turn Initialize
-	int turn = 0;
-	const int MAX_TURN = corporation->stockCount;
+	turn = 0;
+	maxTurn = corporation->stockCount - 1;
 
 	// JsonData Release
 	free(url);
@@ -34,22 +37,31 @@ void InitializeGame()
 	// Time Initialize
 	sharedOldTime = clock();
 	oldTime = clock();
-	day = 0;
+
+	return true;
 }
 
 void UpdateGame()
 {
-	
+
 }
 
-void ProcessGame()
+bool ProcessGame()
 {
 	curTime = clock();
-	if (2000 <= curTime - oldTime)
+	if (100 <= curTime - oldTime)
 	{
 		oldTime = clock();
-		day++;
+
+		if (turn == maxTurn)
+		{
+			return false;
+		}
+
+		turn++;
 	}
+
+	return true;
 }
 
 void WaitGame()

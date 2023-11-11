@@ -66,11 +66,10 @@ char* PostWebRequest(char* url)
     if (resCode != CURLE_OK)
     {
         fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(resCode));
+        return NULL;
     }
 
     char* jsonData = webResonse.jsonData;
-    // InitializeJSON(webResonse.jsonData);
-    // fprintf(stdout, "%s", res.data);
 
     curl_easy_cleanup(curl);
 

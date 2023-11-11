@@ -14,7 +14,8 @@
 extern char* url;
 extern char* jsonData;
 extern Corporation* corporation;
-extern int day;
+extern int turn;
+extern int maxTurn;
 
 extern bool hasExitRenderThread;
 extern bool hasLoadComplete;
@@ -22,9 +23,9 @@ extern bool isDownESC;
 
 extern clock_t sharedCurTime, sharedOldTime;
 
-void InitializeGame();
+bool InitializeGame();
 void UpdateGame();
-void ProcessGame();
+bool ProcessGame();
 void WaitGame();
 void ReleaseGame();
 

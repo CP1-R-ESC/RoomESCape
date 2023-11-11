@@ -4,9 +4,10 @@
 #include <stdbool.h>
 
 #define FRAME_BUFFER_SIZE 10
+#define MAX_BUFFER_SIZE 10000
 
-#define SCREEN_WIDTH  1920
-#define SCREEN_HEIGHT 1080
+#define SCREEN_WIDTH  250
+#define SCREEN_HEIGHT 60
 
 enum Color
 {
@@ -28,13 +29,26 @@ enum Color
     WHITE = 15,
 };
 
+typedef struct
+{
+    int createdTurn;
+    int height;
+    char character[4];
+} LineInfo;
+
+typedef struct
+{
+    int curTurn;
+    int size;
+    LineInfo** lineInfoes;
+} Chart;
 
 void InitializeScreen();						// display buffer initialize - front buffer, back buffer create
 void RenderScreen();
 void ClearScreen();								// one buffer draw, other buffer have to be cleared
 void FlippingScreen();							// active buffer change state
 void CheckFrameScreen();
-void WaitRenderScreen(bool* isDownESC);
+void WaitRenderScreen();
 void ReleaseScreen();							// release two buffer
 void PrintScreen(int x, int y, char* string);	// output
 
